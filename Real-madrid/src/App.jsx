@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import realMadridLogo from './assets/real-madrid-logo.png'
 import './App.css'
+import News from './News.jsx'
+import Squad from './Squad.jsx'
 
 function App() {
   return (
@@ -40,6 +42,8 @@ With a record-breaking 15 UEFA Champions League titles and 36 La Liga championsh
 
 From the golden days of Di Stéfano, Raúl, and Cristiano Ronaldo to the new era led by stars like Jude Bellingham, Kylian Mbappé, and Vinícius Júnior, the club continues to evolve while staying true to its historic values.</p>
       </div>
+      <News></News>
+      <Squad></Squad>
     </div>
   )
 }

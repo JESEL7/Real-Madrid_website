@@ -156,6 +156,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 
   /* Add background image */
   background-image: url('./assets/ucl.jpg');
