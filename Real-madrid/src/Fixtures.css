@@ -1,0 +1,73 @@
+.fixtures-section {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fixture-card {
+  width: 355px;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.fixture-top {
+  background-color: black;
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.team img {
+  height: 40px;
+  width: auto;
+}
+
+.fixture-bottom {
+  background-color: white;
+  padding: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+}
+
+.category {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.fixture-bottom h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.25rem 0;
+}
+
+.matchday {
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.date,
+.location {
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 0.3rem;
+  display: flex;
+  align-items: center;
+}

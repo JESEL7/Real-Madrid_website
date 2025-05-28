@@ -5,6 +5,7 @@ import realMadridLogo from './assets/real-madrid-logo.png'
 import './App.css'
 import News from './News.jsx'
 import Squad from './Squad.jsx'
+import Fixtures from './Fixtures.jsx'
 
 function App() {
   return (
@@ -44,6 +45,7 @@ From the golden days of Di Stéfano, Raúl, and Cristiano Ronaldo to the new era
       </div>
       <News></News>
       <Squad></Squad>
+      <Fixtures></Fixtures>
     </div>
   )
 }
