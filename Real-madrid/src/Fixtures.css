@@ -35,7 +35,7 @@
 }
 
 .team img {
-  height: 40px;
+  height: 52px; /* was 40px */
   width: auto;
 }
 

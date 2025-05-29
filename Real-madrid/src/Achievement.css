@@ -1,0 +1,110 @@
+.achievement-section {
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: #3a1ff4;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.achievement-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.achievement-image img {
+  max-width: 100%;
+  border-radius: 1.5rem;
+  height: 400px;
+  width: 700px;
+}
+
+.achievement-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #eee;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.tab.active {
+  background-color: #3a1ff4;
+  color: white;
+}
+
+.view-link {
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: #3a1ff4;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.trophy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.trophy-grid-custom {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.trophy-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.trophy-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.trophy-icon {
+  font-size: 1.8rem;
+  color: #3a1ff4;
+}
+
+.trophy-count {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.trophy-label {
+  font-size: 0.9rem;
+  color: #444;
+  white-space: pre-line;
+}
+
+.year-bar {
+  margin-top: auto;
+  align-self: flex-end;
+  background-color: #3a1ff4;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+}

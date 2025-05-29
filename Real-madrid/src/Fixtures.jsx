@@ -1,13 +1,18 @@
 import React from 'react';
 import './Fixtures.css';
+import realMadridLogo from './assets/real-madrid-logo.png';
+import alhilalLogo from './assets/al-hilal.png'; 
+import pachukaLogo from './assets/pachuka.png'; 
+import salzburgLogo from './assets/salzburg.png';
+
 
 const fixtures = [
   {
     id: 1,
     homeTeam: 'Real Madrid',
-    homeLogo: '/images/realmadrid.png',
+    homeLogo: realMadridLogo, // use the imported variable
     awayTeam: 'Al Hilal',
-    awayLogo: '/images/alhilal.png',
+    awayLogo: alhilalLogo, 
     matchday: 'Matchday 1',
     tournament: 'FIFA Club World Cup',
     date: 'Wednesday, Jun 18, 9:00 PM',
@@ -16,9 +21,9 @@ const fixtures = [
   {
     id: 2,
     homeTeam: 'Real Madrid',
-    homeLogo: '/images/realmadrid.png',
+    homeLogo: realMadridLogo, // use the imported variable for consistency
     awayTeam: 'Pachuca',
-    awayLogo: '/images/pachuca.png',
+    awayLogo: pachukaLogo, 
     matchday: 'Matchday 2',
     tournament: 'FIFA Club World Cup',
     date: 'Sunday, Jun 22, 9:00 PM',
@@ -27,9 +32,9 @@ const fixtures = [
   {
     id: 3,
     homeTeam: 'Salzburg',
-    homeLogo: '/images/salzburg.png',
+    homeLogo: salzburgLogo,
     awayTeam: 'Real Madrid',
-    awayLogo: '/images/realmadrid.png',
+    awayLogo: realMadridLogo, // use the imported variable for away logo
     matchday: 'Matchday 3',
     tournament: 'FIFA Club World Cup',
     date: 'Friday, Jun 27, 3:00 AM',
