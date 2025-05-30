@@ -12,8 +12,8 @@ function SignIn() {
   };
 
   return (
-    <>
-      <div className="signin-bg"></div>
+
+      <div className="signin-bg">
       <div className="signin-container">
         <form className="signin-form" onSubmit={handleSubmit}>
           <h2>Sign In</h2>
@@ -47,7 +47,8 @@ function SignIn() {
           </div>
         </form>
       </div>
-    </>
+      </div>
+
   );
 }
 
