@@ -30,14 +30,16 @@ const Achievement = () => {
             <div className="trophy-col">
               {col1.map((item, index) => (
                 <div className="trophy-item" key={index}>
-                  <div
-                    className="trophy-icon"
-                    style={item.label.includes('UEFA Cup') ? { marginRight: '1.5rem' } : {}}
-                  >
+                  <div className="trophy-icon">
                     <img src={item.icon} alt="icon" style={{ width: 40, height: 40 }} />
                   </div>
                   <div className="trophy-count">{item.count}</div>
-                  <div className="trophy-label">{item.label}</div>
+                  <div
+                    className="trophy-label"
+                    style={item.label.includes('UEFA Cup') ? { marginLeft: '1.8rem' } : {}}
+                  >
+                    {item.label}
+                  </div>
                 </div>
               ))}
             </div>

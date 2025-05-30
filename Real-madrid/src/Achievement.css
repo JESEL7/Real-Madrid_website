@@ -21,6 +21,11 @@
   border-radius: 1.5rem;
   height: 400px;
   width: 700px;
+  transition: 1s;
+}
+
+.achievement-image img:hover{
+    transform:scale(1.05) ;
 }
 
 .achievement-details {
