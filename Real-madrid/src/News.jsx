@@ -31,15 +31,17 @@ const newsData = [
 
 function News() {
   return (
-    <div>
-      <div className="main-card-news">
-        <div className="main-card-news-img" style={{ backgroundImage: `url(${newsImg})` }}></div>
-        <div className="main-card-news-content">
-        <h2>Xabi Alonso unveiled as new Real Madrid coach</h2>
-          <p>
-            “It's the dawn of a new era, full of excitement and intense emotions. The coach coming in is already one of the best in the world and the embodiment of the Real Madrid values,” stated Florentino Pérez.
-        </p>
-        </div>
+    <section id="news">
+      <div>
+
+        <div className="main-card-news">
+          <div className="main-card-news-img" style={{ backgroundImage: `url(${newsImg})` }}></div>
+          <div className="main-card-news-content">
+            <h2>Xabi Alonso unveiled as new Real Madrid coach</h2>
+            <p>
+              “It's the dawn of a new era, full of excitement and intense emotions. The coach coming in is already one of the best in the world and the embodiment of the Real Madrid values,” stated Florentino Pérez.
+            </p>
+          </div>
       </div>
       <div className="news-cards-container">
         {newsData.map((item, idx) => (
@@ -53,6 +55,7 @@ function News() {
         ))}
       </div>
     </div>
+    </section>
   )
 }
 

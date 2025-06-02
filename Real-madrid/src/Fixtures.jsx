@@ -44,6 +44,7 @@ const fixtures = [
 
 const Fixtures = () => {
   return (
+    <section id="fixtures">
     <div className="fixtures-section">
       {fixtures.map((fixture) => (
         <div className="fixture-card" key={fixture.id}>
@@ -67,6 +68,7 @@ const Fixtures = () => {
         </div>
       ))}
     </div>
+    </section>
   );
 };
 

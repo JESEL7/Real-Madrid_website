@@ -1,9 +1,21 @@
 .fixtures-section {
   display: flex;
+  flex-direction: row;
   gap: 1.5rem;
   padding: 2rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items: flex-start;
+  overflow-x: auto;
+}
+
+@media (max-width: 1200px) {
+  .fixtures-section {
+    gap: 1rem;
+    padding: 1rem;
+    flex-wrap: wrap;
+    overflow-x: auto;
+  }
 }
 
 .fixture-card {
@@ -15,7 +27,29 @@
   display: flex;
   flex-direction: column;
   transition: 0.5s;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
 }
+
+@media (max-width: 1150px) {
+  .fixtures-section {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .fixture-card {
+    width: 90vw;
+    min-width: 260px;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 400px) {
+  .fixture-card {
+    width: 98vw;
+    min-width: 0;
+  }
+}
+
 .fixture-card:hover{
     transform:scale(1.05) ;
 }

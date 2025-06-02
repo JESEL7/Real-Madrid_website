@@ -19,6 +19,7 @@ const Achievement = () => {
   const col2 = achievements.slice(5);
 
   return (
+    <section id="achievements">
     <section className="achievement-section">
       <h2 className="title">A legendary track record</h2>
       <div className="achievement-container">
@@ -57,6 +58,7 @@ const Achievement = () => {
           </div>
         </div>
       </div>
+    </section>
     </section>
   );
 };
