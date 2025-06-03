@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import viteLogo from '/vite.svg' // Remove unused import
 import realMadridLogo from './assets/real-madrid-logo.png'
 import './App.css'
 import News from './News.jsx'
 import Squad from './Squad.jsx'
 import Fixtures from './Fixtures.jsx'
 import Achievement from './Achievement.jsx'
-import SignIn from './Sign-in.jsx' // import SignIn
+import SignIn from './Sign-in.jsx'
+import Login from './login.jsx'
+import Shop from './Shop.jsx'
 
 function App() {
   const [page, setPage] = useState('home');
@@ -22,12 +23,12 @@ function App() {
         <div className="navbar-list">
           <div className="navbar-center">
             <ul>
-              <li><a href="#" onClick={() => setPage('home')}>Home</a></li>
-              <li><a href="#">News</a></li>
-              <li><a href="#">Squad</a></li>
-              <li><a href="#">Fixtures</a></li>
-              <li><a href="#">Achievments</a></li>
-              <li><a href="#">Shop</a></li>
+             <li><a href="#" onClick={() => setPage('home')}>Home</a></li>
+              <li><a href="#news">News</a></li>
+              <li><a href="#squad">Squad</a></li>
+              <li><a href="#fixtures">Fixtures</a></li>
+              <li><a href="#achievements">Achievements</a></li>
+              <li><a href="#shop">Shop</a></li>
             </ul>
           </div>
           <div className="navbar-right">
@@ -35,14 +36,18 @@ function App() {
               <li className='sign-up'>
                 <a href="#" onClick={() => setPage('signin')}>Sign-up</a>
               </li>
-              <li><a href="#">Login</a></li>
+              <li>
+                <a href="#" onClick={() => setPage('login')}>Login</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
       {/* Card below navbar */}
       {page === 'signin' ? (
-        <SignIn />
+        <SignIn onLogin={() => setPage('login')} />
+      ) : page === 'login' ? (
+        <Login onSignUp={() => setPage('signin')} />
       ) : (
         <>
           <div className="main-card">
@@ -57,6 +62,7 @@ From the golden days of Di Stéfano, Raúl, and Cristiano Ronaldo to the new era
           <Squad />
           <Fixtures />
           <Achievement />
+          <Shop />
         </>
       )}
     </div>

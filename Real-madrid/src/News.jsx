@@ -31,6 +31,7 @@ const newsData = [
 
 function News() {
   return (
+    <section id="news">
     <div>
       <div className="main-card-news">
         <div className="main-card-news-img" style={{ backgroundImage: `url(${newsImg})` }}></div>
@@ -53,6 +54,7 @@ function News() {
         ))}
       </div>
     </div>
+    </section>
   )
 }
 

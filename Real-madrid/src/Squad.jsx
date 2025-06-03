@@ -89,6 +89,7 @@ function SquadRow({ title, players }) {
   const hideArrows = title === "Goalkeeper" || title === "Coach";
 
   return (
+    <section id="squad">
     <div className="squad-section">
       <h2 className="squad-title">{title}</h2>
       <div className="squad-wrapper">
@@ -126,6 +127,7 @@ function SquadRow({ title, players }) {
         )}
       </div>
     </div>
+    </section>
   );
 }
 

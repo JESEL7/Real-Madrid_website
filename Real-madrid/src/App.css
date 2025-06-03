@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+body{
+  background-color: white;
+  margin: 0%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

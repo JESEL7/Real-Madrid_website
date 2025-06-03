@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Sign-in.css';
+import './login.css';
 
-function SignIn({ onLogin }) {
+function Login({ onSignUp }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -27,11 +27,11 @@ function SignIn({ onLogin }) {
   };
 
   return (
-      <div className="signin-bg">
-      <div className="signin-container">
-        <form className="signin-form" onSubmit={handleSubmit}>
-          <h2>Sign In</h2>
-          <div className="signin-field">
+      <div className="login-bg">
+      <div className="login-container">
+        <form className="login-form" onSubmit={handleSubmit}>
+          <h2>LogIn</h2>
+          <div className="login-field">
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -43,7 +43,7 @@ function SignIn({ onLogin }) {
               placeholder="Enter your email"
             />
           </div>
-          <div className="signin-field">
+          <div className="login-field">
             <label htmlFor="password">Password</label>
             <input
               id="password"
@@ -55,19 +55,19 @@ function SignIn({ onLogin }) {
               placeholder="Enter your password"
             />
           </div>
-          <button type="submit" className="signin-btn">Sign In</button>
-          {message && <div className="signin-extra">{message}</div>}
-          <div className="signin-extra">
-            Already have an account?{' '}
+          <button type="submit" className="login-btn">Sign In</button>
+          {message && <div className="login-extra">{message}</div>}
+          <div className="login-extra">
+            Don't have an account?{' '}
             <a
               href="#"
-              className="signin-link"
+              className="login-link"
               onClick={e => {
                 e.preventDefault();
-                if (onLogin) onLogin();
+                if (onSignUp) onSignUp();
               }}
             >
-              Login
+              Create Account
             </a>
           </div>
         </form>
@@ -76,4 +76,4 @@ function SignIn({ onLogin }) {
   );
 }
 
-export default SignIn;
+export default Login;

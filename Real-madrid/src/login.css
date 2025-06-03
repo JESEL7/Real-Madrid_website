@@ -1,4 +1,4 @@
-.signin-container {
+.login-container {
   min-height: 100vh;
   display: flex;
   align-items: flex-start; /* changed from center to flex-start */
@@ -8,8 +8,8 @@
   /* Add background image only for sign-in page */
   
 }
-.signin-bg{
-background: url('./assets/stadium1.jpg') center center/cover no-repeat;
+.login-bg{
+background: url('./assets/stadium.png') center center/cover no-repeat;
 min-height: 100vh;
 min-width: 100vw;
 
@@ -22,7 +22,7 @@ position: absolute;
     overflow-y: hidden;
 }
 
-.signin-container .signin-form {
+.login-container .login-form {
   background: white; /* more transparent for frosted glass */
   padding: 1.5rem 1.2rem;
   border-radius: 18px;
@@ -38,7 +38,7 @@ position: absolute;
   
 }
 
-.signin-container .signin-form h2 {
+.login-container .login-form h2 {
   margin: 0 0 0.7rem 0;
   color: #213547;
   text-align: center;
@@ -46,19 +46,19 @@ position: absolute;
   font-weight: 700;
 }
 
-.signin-container .signin-field {
+.login-container .login-field {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.signin-container .signin-field label {
+.login-container .login-field label {
   font-size: 1rem;
   color: #213547;
   font-weight: 500;
 }
 
-.signin-container .signin-field input {
+.login-container .login-field input {
   padding: 0.7rem 1rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
@@ -67,12 +67,12 @@ position: absolute;
   transition: border-color 0.2s;
 }
 
-.signin-container .signin-field input:focus {
+.login-container .login-field input:focus {
   border-color: #646cff;
   outline: none;
 }
 
-.signin-container .signin-btn {
+.login-container .login-btn {
   background: #646cff;
   color: #fff;
   border: none;
@@ -84,18 +84,18 @@ position: absolute;
   transition: 0.2s;
 }
 
-.signin-container .signin-btn:hover {
+.login-container .login-btn:hover {
   background: #3a1ff4;
 }
 
-.signin-container .signin-extra {
+.login-container .login-extra {
   text-align: center;
   font-size: 1rem;
   color: #444;
   margin-top: 0.5rem;
 }
 
-.signin-container .signin-link {
+.login-container .login-link {
   color: #646cff;
   text-decoration: underline;
   cursor: pointer;
@@ -103,6 +103,6 @@ position: absolute;
   margin-left: 4px;
 }
 
-.signin-container .signin-link:hover {
+.login-container .login-link:hover {
   color: #3a1ff4;
 }
