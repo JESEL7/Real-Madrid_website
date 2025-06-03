@@ -2,6 +2,14 @@
   padding: 2rem;
   background-color: white;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .squad-section {
+    padding: 1rem;
+  }
 }
 
 .squad-title {
@@ -14,7 +22,7 @@
 .squad-main-heading {
   font-size: 2.7rem;
   font-weight: 900;
-  margin-bottom: 0rem; /* reduced from 2.5rem */
+  margin-bottom: 0rem;
   color: #213547;
   text-align: center;
   letter-spacing: 1px;
@@ -26,25 +34,28 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .squad-scroll {
   display: flex;
   gap: 1rem;
-  overflow-x: hidden; /* Hide scrollbar */
+  overflow-x: hidden;
   overflow-y: hidden;
   scroll-behavior: smooth;
   padding-bottom: 1rem;
   max-width: 980px;
-  scrollbar-width: none; /* Firefox */
-  background: #fff !important; /* Force white background */
-  box-shadow: none !important;  /* Remove any shadow */
-  /* Remove any gradient or shade */
+  scrollbar-width: none;
+  background: #fff !important;
+  box-shadow: none !important;
   background-image: none !important;
 }
 
-.squad-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+@media (max-width: 1100px) {
+  .squad-scroll {
+    max-width: 98vw;
+    gap: 0.5rem;
+  }
 }
 
 .squad-card {
@@ -57,6 +68,13 @@
   background: linear-gradient(to bottom, #d5d5ff, #ffffff);
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  .squad-card {
+    width: 90vw;
+    height: 220px;
+  }
 }
 
 .squad-image {

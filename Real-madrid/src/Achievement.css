@@ -14,6 +14,7 @@
   gap: 2rem;
   align-items: flex-start;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .achievement-image img {
@@ -22,6 +23,7 @@
   height: 400px;
   width: 700px;
   transition: 1s;
+  object-fit: cover;
 }
 
 .achievement-image img:hover{
@@ -73,12 +75,28 @@
 .trophy-grid-custom {
   display: flex;
   gap: 2.5rem;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .trophy-grid-custom {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+  }
 }
 
 .trophy-col {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+  .trophy-col {
+    align-items: center;
+  }
 }
 
 .trophy-item {
@@ -90,6 +108,21 @@
 .trophy-icon {
   font-size: 1.8rem;
   color: #3a1ff4;
+}
+
+.trophy-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 600px) {
+  .trophy-icon img {
+    width: 28px;
+    height: 28px;
+  }
+  .trophy-item {
+    gap: 0.4rem;
+  }
 }
 
 .trophy-count {
@@ -112,4 +145,26 @@
   padding: 0.4rem 1rem;
   border-radius: 999px;
   font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .achievement-image img {
+    width: 90vw;
+    height: 250px;
+  }
+  .achievement-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .achievement-image img {
+    width: 98vw;
+    height: 160px;
+  }
+  .achievement-container {
+    gap: 0.5rem;
+  }
 }

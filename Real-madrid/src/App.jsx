@@ -7,8 +7,14 @@ import Squad from './Squad.jsx'
 import Fixtures from './Fixtures.jsx'
 import Achievement from './Achievement.jsx'
 import SignIn from './Sign-in.jsx'
+<<<<<<< HEAD
 import Login from './login.jsx'
 import Shop from './Shop.jsx'
+=======
+import Login from './login.jsx' // import your Login component
+import Shop from './Shop.jsx'
+
+>>>>>>> 342247e459ea715341bc9eb220c62a6469fd4624
 
 function App() {
   const [page, setPage] = useState('home');
@@ -23,7 +29,11 @@ function App() {
         <div className="navbar-list">
           <div className="navbar-center">
             <ul>
+<<<<<<< HEAD
              <li><a href="#" onClick={() => setPage('home')}>Home</a></li>
+=======
+              <li><a href="#" onClick={() => setPage('home')}>Home</a></li>
+>>>>>>> 342247e459ea715341bc9eb220c62a6469fd4624
               <li><a href="#news">News</a></li>
               <li><a href="#squad">Squad</a></li>
               <li><a href="#fixtures">Fixtures</a></li>
@@ -43,11 +53,16 @@ function App() {
           </div>
         </div>
       </nav>
-      {/* Card below navbar */}
       {page === 'signin' ? (
+<<<<<<< HEAD
         <SignIn onLogin={() => setPage('login')} />
       ) : page === 'login' ? (
         <Login onSignUp={() => setPage('signin')} />
+=======
+        <SignIn />
+      ) : page === 'login' ? (
+        <Login />
+>>>>>>> 342247e459ea715341bc9eb220c62a6469fd4624
       ) : (
         <>
           <div className="main-card">
@@ -62,7 +77,11 @@ From the golden days of Di Stéfano, Raúl, and Cristiano Ronaldo to the new era
           <Squad />
           <Fixtures />
           <Achievement />
+<<<<<<< HEAD
           <Shop />
+=======
+          <Shop /> {/* Place Shop below Achievement */}
+>>>>>>> 342247e459ea715341bc9eb220c62a6469fd4624
         </>
       )}
     </div>
