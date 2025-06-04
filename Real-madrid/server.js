@@ -56,6 +56,24 @@ app.post('/api/signin', async (req, res) => {
   }
 });
 
+// API endpoint to get all news
+app.get('/api/news', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const news = db.collection('News');
+    const newsList = await news.find({}).toArray();
+    res.json(newsList);
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
 // Serve admin dashboard route for React SPA
 app.get('/admin-dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
