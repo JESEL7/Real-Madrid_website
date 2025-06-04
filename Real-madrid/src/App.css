@@ -141,7 +141,7 @@ body{
 }
 .clubname{
   position: fixed;
-  top: 19px;
+  top: 15px;
   left: 100px;
   width: auto;
   z-index: 1100;

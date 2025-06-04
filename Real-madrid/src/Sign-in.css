@@ -9,12 +9,8 @@
   
 }
 .signin-bg{
-<<<<<<< HEAD
-background: url('./assets/stadium1.jpg') center center/cover no-repeat;
-=======
 background: url('./stadium1.jpg' ) center center/cover no-repeat;
 
->>>>>>> 342247e459ea715341bc9eb220c62a6469fd4624
 min-height: 100vh;
 min-width: 100vw;
 position: absolute;
