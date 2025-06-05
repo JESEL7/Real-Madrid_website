@@ -1,145 +1,147 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Squad.css';
-import courtois from './assets/courtois.jpg';
-import lunin from './assets/lunin.jpg';
-import carvajal from './assets/carvajal.jpg';
-import militao from './assets/militao.jpg';
-import alaba from './assets/alaba.jpg';
-import vallejo from './assets/vallejo.jpg';
-import fran from './assets/fran.jpg';
-import rudiger from './assets/rudiger.jpg';
-import mendy from './assets/mendy.jpg';
-import bellingham from './assets/bellingham.jpg';
-import camavinga from './assets/camavinga.jpg';
-import valverde from './assets/valverde.jpg';
-import modric from './assets/modric.jpg';
-import tchouameni from './assets/tchouameni.jpg';
-import guler from './assets/guler.jpg';
-import ceballos from './assets/ceballos.jpg';
-import vini from './assets/vini.jpg';
-import mbappe from './assets/mbappe.jpg';
-import rodrygo from './assets/rodrygo.jpg';
-import endrick from './assets/endrick.jpg';
-import brahim from './assets/brahim.jpg';
-import xabi from './assets/xabi.jpg';
 
-const goalkeepers = [
-  { number: 1, name: 'Courtois', position: 'Goalkeeper', image: courtois },
-  { number: 13, name: 'Lunin', position: 'Goalkeeper', image: lunin }
-];
-
-const defenders = [
-  { number: 2, name: 'Carvajal', position: 'Defender', image: carvajal },
-  { number: 3, name: 'E. Militão', position: 'Defender', image: militao },
-  { number: 4, name: 'Alaba', position: 'Defender', image: alaba },
-  { number: 18, name: 'Vallejo', position: 'Defender', image: vallejo },
-  { number: 20, name: 'Fran García', position: 'Defender', image: fran },
-  { number: 22, name: 'Rüdiger', position: 'Defender', image: rudiger },
-  { number: 23, name: 'F. Mendy', position: 'Defender', image: mendy },
-];
-
-const midfielders = [
-  { number: 5, name: 'Bellingham', position: 'Midfielder', image: bellingham },
-  { number: 6, name: 'Camavinga', position: 'Midfielder', image: camavinga },
-  { number: 8, name: 'Valverde', position: 'Midfielder', image: valverde },
-  { number: 10, name: 'Modrić', position: 'Midfielder', image: modric },
-  { number: 14, name: 'Tchouaméni', position: 'Midfielder', image: tchouameni },
-  { number: 15, name: 'Arda Güler', position: 'Midfielder', image: guler },
-  { number: 19, name: 'D. Ceballos', position: 'Midfielder', image: ceballos },
-];
-
-const forwards = [
-  { number: 7, name: 'Vinícius Jr.', position: 'Forward', image: vini },
-  { number: 9, name: 'Mbappé', position: 'Forward', image: mbappe },
-  { number: 11, name: 'Rodrygo', position: 'Forward', image: rodrygo },
-  { number: 16, name: 'Endrick', position: 'Forward', image: endrick },
-  { number: 21, name: 'Brahim', position: 'Forward', image: brahim },
-];
-
-const coaches = [
-  { number: '', name: 'Xabi Alonso', position: 'Coach', image: xabi },
-];
+function getImageSrc(img) {
+  if (!img) return '';
+  if (img.startsWith('data:image')) return img;
+  if (img.length > 100) return `data:image/jpeg;base64,${img}`; // crude base64 check
+  if (img.startsWith('http')) return img;
+  return `/assets/${img}`;
+}
 
 function SquadRow({ title, players }) {
   const scrollRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCount = 4;
   const total = players.length;
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
+  const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  const handleNext = () => setCurrentIndex((prev) => Math.min(prev + 1, total - visibleCount));
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, total - visibleCount));
-  };
-
-  React.useEffect(() => {
+  useEffect(() => {
     const { current } = scrollRef;
     if (!current) return;
     const cardWidth = current.querySelector('.squad-card')?.offsetWidth || 230;
-    const gap = 16; // 1rem gap
+    const gap = 16;
     current.scrollTo({
       left: (cardWidth + gap) * currentIndex,
       behavior: 'smooth'
     });
   }, [currentIndex]);
 
-  // Hide arrows for goalkeepers and coaches
   const hideArrows = title === "Goalkeeper" || title === "Coach";
 
   return (
     <section id="squad">
-    <div className="squad-section">
-      <h2 className="squad-title">{title}</h2>
-      <div className="squad-wrapper">
-        {!hideArrows && (
-          <button
-            className="squad-arrow left"
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
-            aria-label="Previous"
-          >
-            &lt;
-          </button>
-        )}
-        <div className="squad-scroll" ref={scrollRef}>
-          {players.map((player, idx) => (
-            <div className="squad-card" key={player.name + idx}>
-              <img src={player.image} alt={player.name} className="squad-image" />
-              <div className="squad-info">
-                {player.number && <span className="squad-number">{player.number}</span>}
-                <span className="squad-name">{player.name}</span>
-                <span className="squad-position">{player.position}</span>
-              </div>
-            </div>
-          ))}
+      <div className="squad-section">
+        <h2 className="squad-title">{title}</h2>
+        <div className="squad-wrapper">
+          {!hideArrows && (
+            <button
+              className="squad-arrow left"
+              onClick={handlePrev}
+              disabled={currentIndex === 0}
+              aria-label="Previous"
+            >
+              &lt;
+            </button>
+          )}
+          <div className="squad-scroll" ref={scrollRef}>
+            {players.map((player, idx) => {
+              let goalsConceded = player.goalsConceded ?? player.goalsconceded ?? player.goals_conceded ?? player['Goals Conceded'] ?? '-';
+              let wins = player.wins ?? player.Wins ?? '-';
+              let draws = player.draws ?? player.Draws ?? '-';
+              let loses = player.loses ?? player.losses ?? player.Loses ?? player.Losses ?? '-';
+              return (
+                <div className="squad-card" key={player.name + idx}>
+                  <img src={getImageSrc(player.image)} alt={player.name} className="squad-image" />
+                  <div className="squad-info">
+                    {player.number && <span className="squad-number">{player.number}</span>}
+                    <span className="squad-name">{player.name}</span>
+                    <span className="squad-position">{player.position}</span>
+                  </div>
+                  <div className="squad-stats-overlay">
+                    <div className="stat-row"><span>Matches</span><span>{player.matches ?? '-'}</span></div>
+                    {title === "Goalkeeper" ? (
+                      <>
+                        <div className="stat-row"><span>Saves</span><span>{player.saves ?? '-'}</span></div>
+                        <div className="stat-row"><span>Minutes</span><span>{player.minutes ?? '-'}</span></div>
+                        <div className="stat-row"><span>Goals Conceded</span><span>{goalsConceded}</span></div>
+                      </>
+                    ) : title === "Coach" ? (
+                      <>
+                        <div className="stat-row"><span>Wins</span><span>{wins}</span></div>
+                        <div className="stat-row"><span>Draws</span><span>{draws}</span></div>
+                        <div className="stat-row"><span>Loses</span><span>{loses}</span></div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="stat-row"><span>Goals</span><span>{player.goals ?? '-'}</span></div>
+                        <div className="stat-row"><span>Minutes</span><span>{player.minutes ?? '-'}</span></div>
+                        <div className="stat-row"><span>Assists</span><span>{player.assists ?? '-'}</span></div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {!hideArrows && (
+            <button
+              className="squad-arrow right"
+              onClick={handleNext}
+              disabled={currentIndex >= total - visibleCount}
+              aria-label="Next"
+            >
+              &gt;
+            </button>
+          )}
         </div>
-        {!hideArrows && (
-          <button
-            className="squad-arrow right"
-            onClick={handleNext}
-            disabled={currentIndex >= total - visibleCount}
-            aria-label="Next"
-          >
-            &gt;
-          </button>
-        )}
       </div>
-    </div>
     </section>
   );
 }
 
 function Squad() {
+  const [players, setPlayers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/squad')
+      .then(res => res.json())
+      .then(data => {
+        setPlayers(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  // Group players by normalized position (case-insensitive, singular)
+  const groupBy = (arr, key) =>
+    arr.reduce((acc, item) => {
+      // Normalize position: lowercase, remove trailing 's'
+      let pos = (item[key] || '').toLowerCase().replace(/s$/, '');
+      acc[pos] = acc[pos] || [];
+      acc[pos].push(item);
+      return acc;
+    }, {});
+
+  const grouped = groupBy(players, 'position');
+
   return (
     <div>
       <h1 className="squad-main-heading">Squad</h1>
-      <SquadRow title="Goalkeeper" players={goalkeepers} />
-      <SquadRow title="Defender" players={defenders} />
-      <SquadRow title="Midfielder" players={midfielders} />
-      <SquadRow title="Forward" players={forwards} />
-      <SquadRow title="Coach" players={coaches} />
+      {loading ? (
+        <div>Loading squad...</div>
+      ) : (
+        <>
+          {grouped['goalkeeper'] && <SquadRow title="Goalkeeper" players={grouped['goalkeeper']} />}
+          {grouped['defender'] && <SquadRow title="Defender" players={grouped['defender']} />}
+          {grouped['midfielder'] && <SquadRow title="Midfielder" players={grouped['midfielder']} />}
+          {grouped['forward'] && <SquadRow title="Forward" players={grouped['forward']} />}
+          {grouped['coach'] && <SquadRow title="Coach" players={grouped['coach']} />}
+        </>
+      )}
     </div>
   );
 }

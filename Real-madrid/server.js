@@ -74,6 +74,61 @@ app.get('/api/news', async (req, res) => {
   }
 });
 
+// API endpoint to get all squad players
+app.get('/api/squad', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const squad = db.collection('Squad');
+    const squadList = await squad.find({}).toArray();
+    res.json(squadList);
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to get all fixtures
+app.get('/api/fixtures', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const fixtures = db.collection('Fixtures');
+    const fixturesList = await fixtures.find({}).toArray();
+    res.json(fixturesList);
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to get achievements
+app.get('/api/achievements', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const achievement = db.collection('Achievement');
+    // Assuming only one document with all trophies, or use .find({}) for an array
+    const data = await achievement.findOne({});
+    res.json(data);
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
 // Serve admin dashboard route for React SPA
 app.get('/admin-dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));

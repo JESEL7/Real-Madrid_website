@@ -16,6 +16,7 @@ import AdminDashboard from './AdminDashboard';
 function Navbar() {
   const navigate = useNavigate();
   return (
+    <section id="home">
     <nav className="navbar">
       <div>
         <img src={realMadridLogo} alt="Real Madrid Logo" className="rm-logo-fixed" />
@@ -24,7 +25,7 @@ function Navbar() {
       <div className="navbar-list">
         <div className="navbar-center">
           <ul>
-            <li><a href="#" onClick={e => { e.preventDefault(); navigate('/'); }}>Home</a></li>
+            <li><a href="#home">Home</a></li>
             <li><a href="#news">News</a></li>
             <li><a href="#squad">Squad</a></li>
             <li><a href="#fixtures">Fixtures</a></li>
@@ -44,6 +45,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
+    </section>
   );
 }
 
