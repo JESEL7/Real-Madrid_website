@@ -21,8 +21,21 @@ function News() {
     return `data:image/jpeg;base64,${img}`;
   };
 
-  const mainNews = newsData.length > 0 ? newsData[0] : null;
-  const otherNews = newsData.length > 1 ? newsData.slice(1) : [];
+  // Find main and side news by role
+  const mainNews = newsData.find(n => n.role === 'main');
+  const side1 = newsData.find(n => n.role === 'side1');
+  const side2 = newsData.find(n => n.role === 'side2');
+  const side3 = newsData.find(n => n.role === 'side3');
+  const side4 = newsData.find(n => n.role === 'side4');
+  // Any other news (fallback)
+  const others = newsData.filter(
+    n => !['main', 'side1', 'side2', 'side3', 'side4'].includes(n.role)
+  );
+
+  // Compose the small news cards in order
+  const smallNews = [side1, side2, side3, side4]
+    .map((item, idx) => item || others[idx])
+    .filter(Boolean);
 
   return (
     <section id="news">
@@ -47,8 +60,8 @@ function News() {
           {loading ? (
             <div>Loading news...</div>
           ) : (
-            otherNews.map((item, idx) => (
-              <div className="news-card" key={idx}>
+            smallNews.map((item, idx) => (
+              <div className="news-card" key={item._id || idx}>
                 <div
                   className="news-card-img"
                   style={{

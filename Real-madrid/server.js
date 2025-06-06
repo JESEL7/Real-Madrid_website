@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -121,6 +121,122 @@ app.get('/api/achievements', async (req, res) => {
     // Assuming only one document with all trophies, or use .find({}) for an array
     const data = await achievement.findOne({});
     res.json(data);
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to update a news card by id
+app.put('/api/news/:id', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const news = db.collection('News');
+    const { id } = req.params;
+    const { title, text, img } = req.body;
+    const result = await news.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { title, text, img } }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'News not found' });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to delete a news card by id
+app.delete('/api/news/:id', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const news = db.collection('News');
+    const { id } = req.params;
+    const result = await news.deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: 'News not found' });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to create a new news card
+app.post('/api/news', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const news = db.collection('News');
+    const { title, text, img } = req.body;
+    const result = await news.insertOne({ title, text, img });
+    res.json({ success: true, id: result.insertedId });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to update a squad player by id
+app.put('/api/squad/:id', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const squad = db.collection('Squad');
+    const { id } = req.params;
+    const update = { ...req.body };
+    delete update._id;
+    const result = await squad.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: update }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Player not found' });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to delete a squad player by id
+app.delete('/api/squad/:id', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const squad = db.collection('Squad');
+    const { id } = req.params;
+    const result = await squad.deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: 'Player not found' });
+    }
+    res.json({ success: true });
   } catch (err) {
     console.error('Database error:', err);
     res.status(500).json({ error: 'Database error' });

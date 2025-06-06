@@ -1,0 +1,224 @@
+/* Use News.css layout for cards and containers */
+@import './News.css';
+
+.admin-news-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  overflow: hidden;
+  min-height: 320px;
+  max-width: 320px;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.admin-news-card.main {
+  flex-direction: row;
+  min-height: 340px;
+  width: 93vw;
+  max-width: 1150px;
+  margin-bottom: 40px;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+  overflow: hidden;
+  background: #fff;
+}
+
+.admin-news-img {
+  width: 100%;
+  min-height: 120px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.admin-news-card.main .admin-news-img {
+  flex: 3 1 0;
+  min-width: 0;
+  min-height: 447px;
+  width: 100%;
+}
+
+.admin-news-img.empty {
+  background: #eee;
+}
+
+.admin-news-upload-btn {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: #646cff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  opacity: 0.9;
+  z-index: 2;
+  border: none;
+  transition: background 0.2s;
+}
+
+.admin-news-upload-btn.global {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  background: #646cff;
+  color: #fff;
+  padding: 0.7rem 2.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  opacity: 0.97;
+  z-index: 1001;
+  border: none;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+.admin-news-delete-btn {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.85;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+/* Remove outline on click for both buttons */
+.admin-news-upload-btn:focus,
+.admin-news-delete-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #646cff55;
+}
+
+.admin-news-content {
+  flex: 1 1 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  background: rgba(255,255,255,0.95);
+}
+
+.admin-news-card:not(.main) .admin-news-content {
+  padding: 2rem;
+}
+
+.admin-news-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.admin-news-title.main {
+  font-size: 2rem;
+}
+
+.admin-news-desc {
+  font-size: 1rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem;
+  resize: vertical;
+}
+
+.admin-news-row {
+  display: flex;
+  flex-direction: row;
+  gap: 31px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 93vw;
+}
+
+/* Ensure 4 cards in a row, matching News.css .news-cards-container */
+.admin-news-card {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 320px;
+  max-width: 320px;
+  width: 100%;
+}
+
+/* Responsive: shrink cards and container on small screens */
+@media (max-width: 1100px) {
+  .admin-news-row {
+    gap: 18px;
+    width: 98vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-news-card.main {
+    flex-direction: column;
+    min-height: 0;
+    width: 98vw;
+  }
+  .admin-news-card {
+    max-width: 100%;
+    width: 100%;
+  }
+  .admin-news-row {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    width: 100vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-news-card {
+    max-width: 98vw;
+    min-width: 0;
+  }
+  .admin-news-card.main .admin-news-img {
+    min-height: 180px;
+    width: 100%;
+  }
+  .admin-news-content {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Hide scrollbars for all cards */
+.main-card-news,
+.news-card {
+  scrollbar-width: none;
+}
+.main-card-news::-webkit-scrollbar,
+.news-card::-webkit-scrollbar {
+  display: none;
+}
+
+/* Only in AdminDashboard, prevent .squad-info from disappearing on hover */
+.admin-dashboard .squad-card .squad-info {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transition: none !important;
+}
