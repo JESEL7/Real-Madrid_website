@@ -1,0 +1,35 @@
+.download-container {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.download-text {
+  font-size: 16px;
+  color: #7c8693;
+  margin-bottom: 4px;
+}
+
+.download-link {
+  font-size: 18px;
+  font-weight: bold;
+  color: #003087;
+  margin-bottom: 20px;
+}
+
+.store-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.store-image {
+  height: 60px;
+  transition: transform 0.3s ease;
+}
+
+.store-image:hover {
+  transform: scale(1.05);
+}

@@ -9,7 +9,7 @@
   
 }
 .login-bg{
-background: url('./assets/stadium.png') center center/cover no-repeat;
+background: url('./src/stadium1.jpg') center center/cover no-repeat;
 min-height: 100vh;
 min-width: 100vw;
 
@@ -20,6 +20,11 @@ position: absolute;
     width: 100%;
     height: 100%;
     overflow-y: hidden;
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 0.85; transform: translateY(0);}
 }
 
 .login-container .login-form {
@@ -35,7 +40,7 @@ position: absolute;
   margin-top: 75px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
   opacity: 0.85; /* slightly transparent for frosted glass effect */
-  
+  animation: fadeInCard 1s cubic-bezier(0.4,0,0.2,1);
 }
 
 .login-container .login-form h2 {

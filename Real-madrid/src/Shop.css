@@ -4,6 +4,7 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
+  margin-top: -37px;
 }
 
 .shop-title {
@@ -30,6 +31,7 @@
   position: relative;
   /* Prevent content from being cut off */
   box-sizing: border-box;
+  margin-top: 31px;
 }
 
 .shop-arrow {
@@ -59,9 +61,11 @@
 }
 .shop-arrow.left {
   left: 0;
+  margin-top: 206px;
 }
 .shop-arrow.right {
   right: 0;
+  margin-top: 206px;
 }
 
 .shop-card {
@@ -116,6 +120,98 @@
 
 .shop-button:hover {
   background: linear-gradient(to right, #4e3dd1, #6b56ec);
+}
+
+.shop-banner-card {
+  margin: 0 auto 40px auto;
+  min-height: 340px;
+  height: auto;
+  max-width: 1106px;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  border: 2px dashed #ccc;
+  transition: border-color 0.2s;
+}
+
+.shop-banner-card:hover {
+  border-color: #646cff;
+}
+
+.shop-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.shop-banner-placeholder {
+  color: #aaa;
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.adidas-card.shop-banner-card {
+  margin: 0 auto 40px auto;
+  min-height: 420px;
+  max-width: 1106px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  border: none;
+  cursor: default;
+}
+
+.adidas-card-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: 16px;
+}
+
+.shop-banner-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.shop-banner-btn {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  padding: 16px 48px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-decoration: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: background 0.2s, color 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.shop-banner-btn:hover {
+  background: #111;
+  color: #fff;
 }
 
 @media (max-width: 1200px) {

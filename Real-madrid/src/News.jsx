@@ -6,13 +6,19 @@ function News() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/news')
-      .then(res => res.json())
-      .then(data => {
-        setNewsData(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+    const fetchNews = () => {
+      fetch('/api/news')
+        .then(res => res.json())
+        .then(data => {
+          setNewsData(data);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    };
+    fetchNews();
+    // Listen for admin news updates (from AdminDashboard)
+    window.addEventListener('news-updated', fetchNews);
+    return () => window.removeEventListener('news-updated', fetchNews);
   }, []);
 
   const getImageSrc = (img) => {

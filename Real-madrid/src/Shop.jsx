@@ -7,13 +7,14 @@ import chineseNewYear from "./assets/chinese-new-year.png";
 import homeKit from "./assets/home-kit.png";
 import training from "./assets/training.png";
 import colorCrest from "./assets/color-crest.png";
+import shopBanner from "./assets/shop-banner.jpg"; // Place your banner image in src/assets and use the correct filename
 
 const shopItems = [
   { title: "Bring Back", image: bringBack, link: "https://shop.realmadrid.com/en-us/content/jerseys-kits/ltd-edition?utm_source=web&utm_medium=shop-links&utm_campaign=herocarrusel_colecciones-ecom_perm_en_us&utm_content=teka-landing&campaignId=cac0da59-74cd-43fc-8fea-0e7aa9281fe9&campaignChannel=web-her&language=en-US" },
   { title: "Terrace Icons", image: terraceIcons, link: "https://shop.realmadrid.com/en-us/adidas/originals?utm_source=web&utm_medium=shop-links&utm_campaign=herobanner_colecciones-ecom_perm_en_us&utm_content=adidas-originals&campaignId=56dc2c1c-5b65-4688-b3ee-18944f62f05b&campaignChannel=web-herocarrusel&language=en-US" },
   { title: "Varsity", image: varsity, link: "https://shop.realmadrid.com/en-us/fashion/travel?utm_source=web&utm_medium=shop-links&utm_campaign=herobanner_colecciones-ecom_perm_en_us&utm_content=fashion-travel&campaignId=56dc2c1c-5b65-4688-b3ee-18944f62f05b&campaignChannel=web-herocarrusel&language=en-US" },
   { title: "Chinese New Year", image: chineseNewYear, link: "https://shop.realmadrid.com/en-us/fashion/purple?utm_source=web&utm_medium=shop-links&utm_campaign=herobanner_colecciones-ecom_perm_en_us&utm_content=fashion-purple&campaignId=56dc2c1c-5b65-4688-b3ee-18944f62f05b&campaignChannel=web-herocarrusel&language=en-US" },
-  { title: "Home Kit 24/25", image: homeKit, link: "https://shop.realmadrid.com/en-us/jerseys-kits/24-25?utm_source=web&utm_medium=shop-links&utm_campaign=herobanner_colecciones-ecom_perm_en_us&utm_content=jerseys-kits&campaignId=56dc2c1c-5b65-4688-b3ee-18944f62f05b&campaignChannel=web-herocarrusel&language=en-US" },
+  { title: "US Pack", image: homeKit, link: "https://shop.realmadrid.com/en-us/adidas/college?utm_source=web&utm_medium=shop-links&utm_campaign=herocarrusel_colecciones-ecom_perm_en_us&utm_content=adidas-college-25-26&campaignId=3f1d2979-17f6-422f-a693-d118956af0c8&campaignChannel=web-herocarrusel&language=en-US" },
   { title: "Official training collection", image: training, link: "https://shop.realmadrid.com/en-us/adidas/training?utm_source=web&utm_medium=shop-links&utm_campaign=herobanner_colecciones-ecom_perm_en_us&utm_content=adidas-training&campaignId=56dc2c1c-5b65-4688-b3ee-18944f62f05b&campaignChannel=web-herocarrusel&language=en-US" },
   { title: "Color Crest", image: colorCrest, link: "https://shop.realmadrid.com/en-us/fanworld/colored-crest?utm_source=web&utm_medium=shop-links&utm_campaign=herobanner_colecciones-ecom_perm_en_us&utm_content=colored-crest&campaignId=56dc2c1c-5b65-4688-b3ee-18944f62f05b&campaignChannel=web-herocarrusel&language=en-US" },
 ];
@@ -24,6 +25,19 @@ const Shop = () => {
   const rowRef = useRef(null);
   const [current, setCurrent] = useState(0);
   const [maxIndex, setMaxIndex] = useState(shopItems.length - visibleCount);
+  // Banner image state (optional, can be static if you want)
+  const [bannerImg, setBannerImg] = useState(null);
+
+  // Banner image upload handler
+  const handleBannerUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      setBannerImg(ev.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
 
   useEffect(() => {
     // Recalculate maxIndex on resize for responsiveness
@@ -61,6 +75,24 @@ const Shop = () => {
       <div className="shop-section" style={{ position: "relative" }}>
         <h2 className="shop-title">Official Store</h2>
         <h3 className="shop-subtitle">Featured Collections</h3>
+        {/* Banner Card above carousel - styled like AdidasCard */}
+        <div className="adidas-card shop-banner-card">
+          <img
+            src={shopBanner}
+            alt="Shop Banner"
+            className="adidas-card-bg"
+          />
+          <div className="shop-banner-content">
+            <a
+              href="https://shop.realmadrid.com/en-us/jerseys-kits/24-25"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shop-banner-btn"
+            >
+              Shop Now
+            </a>
+          </div>
+        </div>
         <button
           className="shop-arrow left"
           onClick={() => handleScroll(-1)}

@@ -245,6 +245,95 @@ app.delete('/api/squad/:id', async (req, res) => {
   }
 });
 
+// API endpoint to update a fixture by id
+app.put('/api/fixtures/:id', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const fixtures = db.collection('Fixtures');
+    const { id } = req.params;
+    const update = { ...req.body };
+    delete update._id;
+    const result = await fixtures.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: update }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Fixture not found' });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to delete a fixture by id
+app.delete('/api/fixtures/:id', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const fixtures = db.collection('Fixtures');
+    const { id } = req.params;
+    const result = await fixtures.deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: 'Fixture not found' });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to create a new fixture
+app.post('/api/fixtures', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const fixtures = db.collection('Fixtures');
+    const doc = { ...req.body };
+    const result = await fixtures.insertOne(doc);
+    res.json({ success: true, id: result.insertedId });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
+// API endpoint to update achievements (PUT)
+app.put('/api/achievements', async (req, res) => {
+  let client;
+  try {
+    client = new MongoClient(uri);
+    await client.connect();
+    const db = client.db(dbName);
+    const achievement = db.collection('Achievement');
+    const update = { ...req.body };
+    delete update._id;
+    // Update the first (and only) document
+    const result = await achievement.updateOne({}, { $set: update }, { upsert: true });
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'Database error' });
+  } finally {
+    if (client) await client.close();
+  }
+});
+
 // Serve admin dashboard route for React SPA
 app.get('/admin-dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));

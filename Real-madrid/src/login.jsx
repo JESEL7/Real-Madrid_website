@@ -3,7 +3,7 @@ import './login.css';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from './App.jsx'; // Import only Navbar
 
-function Login({ onSignUp }) {
+function Login({ onSignUp, onLoginSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -12,8 +12,8 @@ function Login({ onSignUp }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
-    // Check for admin credentials before making API call
     if (email === 'admin@realmadrid.com' && password === 'admin123') {
+      if (onLoginSuccess) onLoginSuccess();
       navigate('/admin-dashboard');
       return;
     }
@@ -26,6 +26,7 @@ function Login({ onSignUp }) {
       const data = await res.json();
       if (res.ok) {
         setMessage('Sign-in successful!');
+        if (onLoginSuccess) onLoginSuccess();
         navigate('/');
       } else {
         setMessage(data.error || 'Sign-in failed');
@@ -75,7 +76,8 @@ function Login({ onSignUp }) {
                 className="login-link"
                 onClick={e => {
                   e.preventDefault();
-                  if (onSignUp) onSignUp();
+                  // Always navigate to sign-up page
+                  navigate('/sign-in');
                 }}
               >
                 Create Account

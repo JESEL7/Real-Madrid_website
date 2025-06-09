@@ -10,10 +10,15 @@ import SignIn from './Sign-in.jsx'
 
 import Login from './login.jsx'
 import Shop from './Shop.jsx'
+import Download from './Download.jsx'
+import Sponsers from './Sponsers.jsx'
+import AdidasCard from './Adidas.jsx'
+import EmiratesCard from './Emirates.jsx'
+import Footer from './Footer.jsx'
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard';
 
-function Navbar() {
+function Navbar({ isLoggedIn, onLogout }) {
   const navigate = useNavigate();
   return (
     <section id="home">
@@ -25,22 +30,123 @@ function Navbar() {
       <div className="navbar-list">
         <div className="navbar-center">
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#squad">Squad</a></li>
-            <li><a href="#fixtures">Fixtures</a></li>
-            <li><a href="#achievements">Achievements</a></li>
-            <li><a href="#shop">Shop</a></li>
+            <li>
+              <a
+                href="#home"
+                onClick={e => {
+                  e.preventDefault();
+                  navigate('/');
+                  setTimeout(() => {
+                    const el = document.querySelector('.main-card');
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="#news"
+                onClick={e => {
+                  e.preventDefault();
+                  navigate('/');
+                  setTimeout(() => {
+                    const el = document.getElementById('news');
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+              >
+                News
+              </a>
+            </li>
+            <li>
+              <a
+                href="#squad"
+                onClick={e => {
+                  e.preventDefault();
+                  navigate('/');
+                  setTimeout(() => {
+                    const el = document.getElementById('squad');
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+              >
+                Squad
+              </a>
+            </li>
+            <li>
+              <a
+                href="#fixtures"
+                onClick={e => {
+                  e.preventDefault();
+                  navigate('/');
+                  setTimeout(() => {
+                    const el = document.getElementById('fixtures');
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+              >
+                Fixtures
+              </a>
+            </li>
+            <li>
+              <a
+                href="#achievements"
+                onClick={e => {
+                  e.preventDefault();
+                  navigate('/');
+                  setTimeout(() => {
+                    const el = document.getElementById('achievements');
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+              >
+                Achievements
+              </a>
+            </li>
+            <li>
+              <a
+                href="#shop"
+                onClick={e => {
+                  e.preventDefault();
+                  navigate('/');
+                  setTimeout(() => {
+                    const el = document.getElementById('shop');
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+              >
+                Shop
+              </a>
+            </li>
           </ul>
         </div>
         <div className="navbar-right">
           <ul>
-            <li className='sign-up'>
-              <a href="#" onClick={e => { e.preventDefault(); navigate('/sign-in'); }}>Sign-up</a>
-            </li>
-            <li>
-              <a href="#" onClick={e => { e.preventDefault(); navigate('/login'); }}>Login</a>
-            </li>
+            {!isLoggedIn ? (
+              <>
+                <li className='sign-up'>
+                  <a href="#" onClick={e => { e.preventDefault(); navigate('/sign-in'); }}>Sign-up</a>
+                </li>
+                <li>
+                  <a href="#" onClick={e => { e.preventDefault(); navigate('/login'); }}>Login</a>
+                </li>
+              </>
+            ) : (
+              <li>
+                <a
+                  href="#"
+                  onClick={e => {
+                    e.preventDefault();
+                    if (onLogout) onLogout();
+                    navigate('/login');
+                  }}
+                >
+                  Logout
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -51,10 +157,10 @@ function Navbar() {
 
 export { Navbar };
 
-function HomeContent() {
+function HomeContent({ isLoggedIn, onLogout }) {
   return (
     <div>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       <div className="main-card">
         <h2>About</h2>
         <p>Real Madrid Club de Fútbol, founded in 1902, is more than just a football club — it’s a global symbol of excellence, dominance, and legacy in world football. Based in Madrid, Spain, the club has set the benchmark for greatness with a history built on success, passion, and iconic moments.
@@ -64,23 +170,33 @@ With a record-breaking 15 UEFA Champions League titles and 36 La Liga championsh
 From the golden days of Di Stéfano, Raúl, and Cristiano Ronaldo to the new era led by stars like Jude Bellingham, Kylian Mbappé, and Vinícius Júnior, the club continues to evolve while staying true to its historic values.</p>
       </div>
       <News />
+      <EmiratesCard />
       <Squad />
+      <AdidasCard />
       <Fixtures />
       <Achievement />
-      <Shop /> {/* Place Shop below Achievement */}
+      <Shop />
+      <Download />
+      <Sponsers />
+      <Footer />
     </div>
   );
 }
 
-function AppContent() {
+function AppContent({ isLoggedIn, onLogout, setIsLoggedIn }) {
   return (
     <Routes>
-      <Route path="/" element={<HomeContent />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<HomeContent isLoggedIn={isLoggedIn} onLogout={onLogout} />} />
+      <Route path="/login" element={
+        <Login
+          onSignUp={() => setIsLoggedIn(false)}
+          onLoginSuccess={() => setIsLoggedIn(true)}
+        />
+      } />
       <Route path="/sign-in" element={
         <div>
-          <Navbar />
-          <SignIn />
+          <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
+          <SignIn onLogin={() => setIsLoggedIn(true)} />
         </div>
       } />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
@@ -90,9 +206,16 @@ function AppContent() {
 }
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Logout handler
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <Router>
-      <AppContent />
+      <AppContent isLoggedIn={isLoggedIn} onLogout={handleLogout} setIsLoggedIn={setIsLoggedIn} />
     </Router>
   );
 }
