@@ -22,7 +22,8 @@ app.use('/assets', express.static(path.join(__dirname, 'dist', 'assets')));
 // Optionally, also serve from src/assets for development
 app.use('/src/assets', express.static(path.join(__dirname, 'src', 'assets')));
 
-app.use(bodyParser.json());
+// Increase payload size limit for large images
+app.use(bodyParser.json({ limit: '50mb' }));
 
 // Move API routes BEFORE the SPA fallback!
 app.post('/api/signin', async (req, res) => {
@@ -138,10 +139,15 @@ app.put('/api/news/:id', async (req, res) => {
     const db = client.db(dbName);
     const news = db.collection('News');
     const { id } = req.params;
-    const { title, text, img } = req.body;
+    // Only set fields that are provided in the request body
+    const updateFields = {};
+    if ('title' in req.body) updateFields.title = req.body.title;
+    if ('text' in req.body) updateFields.text = req.body.text;
+    if ('img' in req.body) updateFields.img = req.body.img;
+    if ('role' in req.body) updateFields.role = req.body.role;
     const result = await news.updateOne(
       { _id: new ObjectId(id) },
-      { $set: { title, text, img } }
+      { $set: updateFields }
     );
     if (result.matchedCount === 0) {
       return res.status(404).json({ error: 'News not found' });

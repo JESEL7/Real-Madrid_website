@@ -67,7 +67,7 @@ function Login({ onSignUp, onLoginSuccess }) {
                 placeholder="Enter your password"
               />
             </div>
-            <button type="submit" className="login-btn">Sign In</button>
+            <button type="submit" className="login-btn">Login</button>
             {message && <div className="login-extra">{message}</div>}
             <div className="login-extra">
               Don't have an account?{' '}

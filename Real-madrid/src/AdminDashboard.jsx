@@ -487,20 +487,6 @@ function EditableFixtureCard({ fixture, onChange, onDelete, isSelected, onSelect
             placeholder="Home Team"
             style={{ width: '90px', marginTop: 8, textAlign: 'center' }}
           />
-          {fixture.homeLogo && (
-            <button
-              type="button"
-              className="admin-news-upload-btn"
-              style={{ marginTop: 6, padding: '2px 10px', fontSize: 12 }}
-              onClick={e => {
-                e.stopPropagation();
-                homeUploadRef.current.value = '';
-                homeUploadRef.current.click();
-              }}
-            >
-              Change Logo
-            </button>
-          )}
         </div>
         <div className="team">
           <div style={{ position: "relative", width: "56px", height: "56px" }}>
@@ -572,20 +558,6 @@ function EditableFixtureCard({ fixture, onChange, onDelete, isSelected, onSelect
             placeholder="Away Team"
             style={{ width: '90px', marginTop: 8, textAlign: 'center' }}
           />
-          {fixture.awayLogo && (
-            <button
-              type="button"
-              className="admin-news-upload-btn"
-              style={{ marginTop: 6, padding: '2px 10px', fontSize: 12 }}
-              onClick={e => {
-                e.stopPropagation();
-                awayUploadRef.current.value = '';
-                awayUploadRef.current.click();
-              }}
-            >
-              Change Logo
-            </button>
-          )}
         </div>
       </div>
       <div className="fixture-bottom">
@@ -1142,7 +1114,12 @@ function AdminDashboard() {
                   <input
                     type="text"
                     value={mainNews.title}
-                    onChange={e => handleNewsChange(newsData.indexOf(mainNews), { ...mainNews, title: e.target.value })}
+                    onChange={e =>
+                      handleNewsChange(
+                        newsData.indexOf(mainNews),
+                        { title: e.target.value }
+                      )
+                    }
                     placeholder="Title"
                     className="admin-news-title main"
                     style={{
@@ -1157,7 +1134,12 @@ function AdminDashboard() {
                   />
                   <textarea
                     value={mainNews.text}
-                    onChange={e => handleNewsChange(newsData.indexOf(mainNews), { ...mainNews, text: e.target.value })}
+                    onChange={e =>
+                      handleNewsChange(
+                        newsData.indexOf(mainNews),
+                        { text: e.target.value }
+                      )
+                    }
                     placeholder="Description"
                     rows={5}
                     className="admin-news-desc"

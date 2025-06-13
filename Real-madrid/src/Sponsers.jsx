@@ -69,7 +69,7 @@ const Sponsers = () => {
         <a href="https://www.softtek.com" target="_blank" rel="noopener noreferrer">
           <img src="https://assets.realmadrid.com/is/content/realmadrid/softtek_gray?$Mobile$" alt="Softtek" />
         </a>
-        <a href="https://www.canon.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://eu.medical.canon/" target="_blank" rel="noopener noreferrer">
           <img src="https://assets.realmadrid.com/is/content/realmadrid/canon_gray?$Mobile$" alt="Canon" />
         </a>
       </div>
@@ -82,7 +82,7 @@ const Sponsers = () => {
         <a href="https://www.sanitas.com" target="_blank" rel="noopener noreferrer">
           <img src="https://assets.realmadrid.com/is/content/realmadrid/sanitas_gray?$Mobile$" alt="Sanitas" />
         </a>
-        <a href="https://www.solandelascabras.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://solandecabras.es/en/" target="_blank" rel="noopener noreferrer">
           <img src="https://assets.realmadrid.com/is/content/realmadrid/solan_gray?$Mobile$" alt="Solan de Cabras" />
         </a>
         <a href="https://www.corpay.com" target="_blank" rel="noopener noreferrer">
