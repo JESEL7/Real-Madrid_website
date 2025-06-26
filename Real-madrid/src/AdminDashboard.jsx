@@ -240,7 +240,6 @@ function EditableSquadSection({ selectedSquadIdx, setSelectedSquadIdx }) {
     fetch('/api/squad')
       .then(res => res.json())
       .then(data => setPlayers(Array.isArray(data) ? data : []));
-    // Expose setSquadImage globally for AdminDashboard to call
     window.setSquadImage = (idx, img) => {
       if (players[idx] && players[idx]._id) {
         fetch(`/api/squad/${players[idx]._id}`, {
@@ -305,15 +304,72 @@ function EditableSquadSection({ selectedSquadIdx, setSelectedSquadIdx }) {
 
   const grouped = groupBy(players, 'position');
 
+  // Helper for horizontal scroll
+  const scrollRefs = {
+    defender: useRef(null),
+    midfielder: useRef(null),
+    forward: useRef(null)
+  };
+
+  const handleScroll = (pos, dir) => {
+    const ref = scrollRefs[pos];
+    if (ref && ref.current) {
+      const scrollAmount = 340; // width of card + gap
+      ref.current.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div>
       <h1 className="squad-main-heading">Squad (Editable)</h1>
       {['goalkeeper', 'defender', 'midfielder', 'forward', 'coach'].map(pos =>
         grouped[pos] ? (
-          <div className="squad-section" key={pos}>
+          <div className="squad-section" key={pos} style={{ position: 'relative' }}>
             <h2 className="squad-title">{pos.charAt(0).toUpperCase() + pos.slice(1)}</h2>
-            <div className="squad-wrapper">
-              <div className="squad-scroll">
+            <div className="squad-wrapper" style={{ position: 'relative' }}>
+              {/* Show arrows only for defender, midfielder, forward */}
+              {['defender', 'midfielder', 'forward'].includes(pos) && (
+                <>
+                  <button
+                    className="shop-arrow left"
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: '-6%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 2
+                    }}
+                    onClick={() => handleScroll(pos, -1)}
+                    aria-label="Scroll Left"
+                  >
+                    &#8592;
+                  </button>
+                  <button
+                    className="shop-arrow right"
+                    style={{
+                      position: 'absolute',
+                      right: 0,
+                      top: '-6%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 2
+                    }}
+                    onClick={() => handleScroll(pos, 1)}
+                    aria-label="Scroll Right"
+                  >
+                    &#8594;
+                  </button>
+                </>
+              )}
+              <div
+                className="squad-scroll"
+                ref={['defender', 'midfielder', 'forward'].includes(pos) ? scrollRefs[pos] : undefined}
+                style={{
+                  overflowX: ['defender', 'midfielder', 'forward'].includes(pos) ? 'auto' : undefined,
+                  scrollBehavior: 'smooth',
+                  display: 'flex',
+                  gap: 24
+                }}
+              >
                 {grouped[pos].map((player, idx) => (
                   <EditableSquadCard
                     key={player._id}
@@ -487,6 +543,20 @@ function EditableFixtureCard({ fixture, onChange, onDelete, isSelected, onSelect
             placeholder="Home Team"
             style={{ width: '90px', marginTop: 8, textAlign: 'center' }}
           />
+          {fixture.homeLogo && (
+            <button
+              type="button"
+              className="admin-news-upload-btn"
+              style={{ marginTop: 6, padding: '2px 10px', fontSize: 12 }}
+              onClick={e => {
+                e.stopPropagation();
+                homeUploadRef.current.value = '';
+                homeUploadRef.current.click();
+              }}
+            >
+              Change Logo
+            </button>
+          )}
         </div>
         <div className="team">
           <div style={{ position: "relative", width: "56px", height: "56px" }}>
@@ -558,6 +628,20 @@ function EditableFixtureCard({ fixture, onChange, onDelete, isSelected, onSelect
             placeholder="Away Team"
             style={{ width: '90px', marginTop: 8, textAlign: 'center' }}
           />
+          {fixture.awayLogo && (
+            <button
+              type="button"
+              className="admin-news-upload-btn"
+              style={{ marginTop: 6, padding: '2px 10px', fontSize: 12 }}
+              onClick={e => {
+                e.stopPropagation();
+                awayUploadRef.current.value = '';
+                awayUploadRef.current.click();
+              }}
+            >
+              Change Logo
+            </button>
+          )}
         </div>
       </div>
       <div className="fixture-bottom">
@@ -979,6 +1063,10 @@ function AdminDashboard() {
   return (
     <div className="admin-dashboard" style={{ padding: 40, position: 'relative', minHeight: '100vh' }}>
       <AdminNavbar />
+      {/* Add Admin-DashBoard heading here */}
+      <h1 style={{ textAlign: "center", marginTop: 32, marginBottom: 32, fontWeight: 700, fontSize: "3.2rem" }}>
+        Admin-DashBoard
+      </h1>
       <section style={{ marginTop: 100 }}>
         <h2>News Section (Editable)</h2>
         {/* Save button for News */}
@@ -1114,12 +1202,7 @@ function AdminDashboard() {
                   <input
                     type="text"
                     value={mainNews.title}
-                    onChange={e =>
-                      handleNewsChange(
-                        newsData.indexOf(mainNews),
-                        { title: e.target.value }
-                      )
-                    }
+                    onChange={e => handleNewsChange(newsData.indexOf(mainNews), { ...mainNews, title: e.target.value })}
                     placeholder="Title"
                     className="admin-news-title main"
                     style={{
@@ -1134,12 +1217,7 @@ function AdminDashboard() {
                   />
                   <textarea
                     value={mainNews.text}
-                    onChange={e =>
-                      handleNewsChange(
-                        newsData.indexOf(mainNews),
-                        { text: e.target.value }
-                      )
-                    }
+                    onChange={e => handleNewsChange(newsData.indexOf(mainNews), { ...mainNews, text: e.target.value })}
                     placeholder="Description"
                     rows={5}
                     className="admin-news-desc"
