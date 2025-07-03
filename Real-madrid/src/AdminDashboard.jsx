@@ -543,20 +543,7 @@ function EditableFixtureCard({ fixture, onChange, onDelete, isSelected, onSelect
             placeholder="Home Team"
             style={{ width: '90px', marginTop: 8, textAlign: 'center' }}
           />
-          {fixture.homeLogo && (
-            <button
-              type="button"
-              className="admin-news-upload-btn"
-              style={{ marginTop: 6, padding: '2px 10px', fontSize: 12 }}
-              onClick={e => {
-                e.stopPropagation();
-                homeUploadRef.current.value = '';
-                homeUploadRef.current.click();
-              }}
-            >
-              Change Logo
-            </button>
-          )}
+          
         </div>
         <div className="team">
           <div style={{ position: "relative", width: "56px", height: "56px" }}>
@@ -628,20 +615,6 @@ function EditableFixtureCard({ fixture, onChange, onDelete, isSelected, onSelect
             placeholder="Away Team"
             style={{ width: '90px', marginTop: 8, textAlign: 'center' }}
           />
-          {fixture.awayLogo && (
-            <button
-              type="button"
-              className="admin-news-upload-btn"
-              style={{ marginTop: 6, padding: '2px 10px', fontSize: 12 }}
-              onClick={e => {
-                e.stopPropagation();
-                awayUploadRef.current.value = '';
-                awayUploadRef.current.click();
-              }}
-            >
-              Change Logo
-            </button>
-          )}
         </div>
       </div>
       <div className="fixture-bottom">
@@ -802,7 +775,7 @@ function EditableFixturesSection() {
 
   return (
     <div>
-      <h2 style={{ marginTop: 60, marginBottom: 24 }}>Fixtures (Editable)</h2>
+      <h2 style={{ marginTop: 60, color: "black", fontSize: "2rem", marginBottom: 24 }}>Fixtures (Editable)</h2>
       <div className="fixtures-section admin-dashboard">
         {fixtures.map((fixture, idx) => (
           <EditableFixtureCard
@@ -852,11 +825,11 @@ function EditableAchievementsSection() {
 
   return (
     <div style={{ marginTop: 60 }}>
-      <h2>Achievements (Editable)</h2>
+      <h2 style={{ color: 'black' }}>Achievements (Editable)</h2>
       {loading ? (
         <div>Loading achievements...</div>
       ) : (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, color: 'black' }}>
           {trophyList.map(([label, count]) => (
             <div key={label} style={{
               minWidth: 220,
@@ -1061,14 +1034,14 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="admin-dashboard" style={{ padding: 40, position: 'relative', minHeight: '100vh' }}>
+    <div className="admin-dashboard" style={{ position: 'relative', minHeight: '100vh' }}>
       <AdminNavbar />
       {/* Add Admin-DashBoard heading here */}
-      <h1 style={{ textAlign: "center", marginTop: 32, marginBottom: 32, fontWeight: 700, fontSize: "3.2rem" }}>
+      <h1 style={{ textAlign: "center", marginTop: 32, marginBottom: 32, color: "black", fontWeight: 700, fontSize: "3.2rem" }}>
         Admin-DashBoard
       </h1>
       <section style={{ marginTop: 100 }}>
-        <h2>News Section (Editable)</h2>
+        <h2 style={{ color: "black" }}>News Section (Editable)</h2>
         {/* Save button for News */}
         {newsChanged && (
           <button

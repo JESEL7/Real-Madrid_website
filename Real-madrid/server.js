@@ -3,9 +3,13 @@ import bodyParser from 'body-parser';
 import { MongoClient, ObjectId } from 'mongodb';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
-const uri = 'mongodb://localhost:27017';
+// const uri = 'mongodb://localhost:27017';
+const uri = process.env.MONGODB_URI; // Use Atlas connection string from .env
 const dbName = 'Real-Madrid';
 const collectionName = 'Users';
 
@@ -355,3 +359,4 @@ app.get(/^\/(?!api).*/, (req, res, next) => {
 app.listen(3001, () => {
   console.log('Server running on http://localhost:3001');
 });
+

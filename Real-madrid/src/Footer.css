@@ -8,3 +8,13 @@
   letter-spacing: 0.5px;
   margin-top: 40px;
 }
+
+.footer-disclaimer {
+  width: 100%;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 18px;
+  font-size: 0.97rem;
+  color: #444;
+  letter-spacing: 0.2px;
+}

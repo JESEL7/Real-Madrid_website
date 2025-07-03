@@ -233,7 +233,6 @@
   justify-content: center;
   align-items: flex-start;
   overflow-x: visible !important; /* Remove horizontal scroll */
-  width: 100%;
 }
 
 .admin-dashboard .fixture-card {
@@ -275,7 +274,7 @@
   position: static; /* Not absolute, so it doesn't overlap */
   z-index: 3;
   box-sizing: border-box;
-  margin-top: 8px;
+  margin-top: 15px;
 }
 
 .admin-dashboard .fixture-submit-btn {
@@ -289,6 +288,7 @@
   padding: 10px 24px;
   cursor: pointer;
   transition: background 0.2s;
+  margin-bottom: -10px;
 }
 
 .admin-dashboard .fixture-submit-btn:hover {
