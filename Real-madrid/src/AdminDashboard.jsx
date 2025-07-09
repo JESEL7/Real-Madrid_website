@@ -58,14 +58,6 @@ function EditableSquadCard({ player, onChange, onDelete, isSelected, onSelect })
         className="squad-image"
         style={{ cursor: 'pointer' }}
       />
-      <button
-        type="button"
-        className="admin-news-delete-btn"
-        style={{ position: 'absolute', top: 16, right: 16, zIndex: 2 }}
-        onClick={e => { e.stopPropagation(); onDelete(); }}
-      >
-        &#10006;
-      </button>
       <div className="squad-info">
         {/* Only show number if not coach */}
         {!isCoach && (
@@ -624,7 +616,7 @@ function EditableFixtureCard({ fixture, onChange, onDelete, isSelected, onSelect
           onChange={e => onChange({ ...fixture, category: e.target.value })}
           placeholder="Category"
           className="category"
-          style={{ width: '100%', marginBottom: 8 }}
+          style={{ width: '100%', marginBottom: 8,color:'white' }}
         />
         <input
           type="text"
@@ -654,14 +646,6 @@ function EditableFixtureCard({ fixture, onChange, onDelete, isSelected, onSelect
           placeholder="Location"
           style={{ width: '100%' }}
         />
-        <button
-          type="button"
-          className="admin-news-delete-btn"
-          style={{ position: 'absolute', top: 16, right: 16 }}
-          onClick={e => { e.stopPropagation(); onDelete(); }}
-        >
-          &#10006;
-        </button>
         <div className="fixture-submit-row">
           <button
             type="button"
@@ -1162,14 +1146,6 @@ function AdminDashboard() {
                       🗑️
                     </button>
                   )}
-                  <button
-                    type="button"
-                    className="admin-news-delete-btn"
-                    style={{ position: 'absolute', top: 16, right: 16 }}
-                    onClick={e => { e.stopPropagation(); handleDelete(newsData.indexOf(mainNews)); }}
-                  >
-                    &#10006;
-                  </button>
                 </div>
                 <div className="main-card-news-content">
                   <input
@@ -1239,14 +1215,6 @@ function AdminDashboard() {
                       🗑️
                     </button>
                   )}
-                  <button
-                    type="button"
-                    className="admin-news-delete-btn"
-                    style={{ position: 'absolute', top: 16, right: 16 }}
-                    onClick={e => { e.stopPropagation(); handleDelete(newsData.indexOf(item)); }}
-                  >
-                    &#10006;
-                  </button>
                 </div>
                 <div className="news-card-content">
                   <input
