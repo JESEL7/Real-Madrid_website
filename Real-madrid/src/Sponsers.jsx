@@ -106,7 +106,7 @@ const Sponsers = () => {
           <a href="https://www.youtube.com/realmadrid" target="_blank" rel="noopener noreferrer">
             <img src="https://vignette.wikia.nocookie.net/youtubepedia/images/c/c0/YouTube.png/revision/latest?cb=20170913140216&path-prefix=es" alt="YouTube" />
           </a>
-          <a href="https://www.onefootball.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://onefootball.com/en/team/real-madrid-26" target="_blank" rel="noopener noreferrer">
             <img src="https://i.pinimg.com/736x/38/55/98/3855980d521825fab10c1198fc6fb2ed.jpg" alt="OneFootball" />
           </a>
           <a href="https://www.twitch.tv/realmadrid" target="_blank" rel="noopener noreferrer">
